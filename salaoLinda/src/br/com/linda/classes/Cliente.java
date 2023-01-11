@@ -37,10 +37,6 @@ public class Cliente extends Pessoa {
     public int getPontosFidelidade() {
         return pontosFidelidade;
     }
-
-    public void setPontosFidelidade(int pontosFidelidade) {
-        this.pontosFidelidade = pontosFidelidade;
-    }
     // Método para adicionar pontos de fidelidade ao cliente
     public void adicionarPontosFidelidade(int pontos){
         this.pontosFidelidade += pontos;

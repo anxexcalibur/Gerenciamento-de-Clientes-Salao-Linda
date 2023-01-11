@@ -12,11 +12,9 @@ public class Salao {
      //vetor de objetos Cliente para armazenar todos os clientes cadastrados no salão
     private ArrayList<Cliente> clientes;
     //vetor de objetos Servico para armazenar todos os serviços oferecidos pelo salão
-    private ArrayList<Servico> servicos;
 
     public Salao(){
         this.clientes = new ArrayList<Cliente>();
-        this.servicos = new ArrayList<Servico>();
     }
     public void atribuirPontosFidelidade(Cliente cliente,int pontos)
     {
