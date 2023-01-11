@@ -13,12 +13,15 @@ import java.util.List;
 public class GerenciadorSalao implements Gerenciador {
     private List<Cliente> clientes;
     // Implementação dos métodos abstratos
+    @Override
     public void adicionarCliente(Cliente c) {
         clientes.add(c);
     }
+    @Override
     public void removerCliente(Cliente c) {
         clientes.remove(c);
     }
+    @Override
     public Cliente pesquisarCliente(String nome) {
         for (Cliente c : clientes) {
             if (c.getNome().equals(nome)) {
