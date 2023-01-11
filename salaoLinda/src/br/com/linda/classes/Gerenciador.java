@@ -8,6 +8,6 @@ package br.com.linda.classes;
  *
  * @author mimi
  */
-public interface ClienteMtds {
+public interface Gerenciador {
     //Interface para colocar metodos necessarios a todas as classes filhas
 }

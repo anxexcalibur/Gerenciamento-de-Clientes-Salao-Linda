@@ -9,6 +9,7 @@ package br.com.linda.classes;
  * @author mimi
  */
 public class Servico {
+    private Cliente cliente;
     private String nome;
     private double preco;
     private Salao salao;
@@ -35,7 +36,10 @@ public class Servico {
         //calculando pontos de fidelidade baseado no preço do serviço
         int pontos = (int) (this.preco / 10);
         //regra adicional para atribuir mais pontos para serviços mais caros
-        if(this.preco > 50) pontos += 5;
+        if(this.preco > 50) {
+            pontos += 5;
+        }
+        cliente.setPontosFidelidade(pontos); //tentei setar isso para os pontos de algum objeto instanciado
         salao.atribuirPontosFidelidade(cliente, pontos);
-    }
+    } 
 }
