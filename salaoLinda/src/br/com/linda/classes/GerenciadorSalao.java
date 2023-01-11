@@ -11,7 +11,7 @@ import java.util.List;
  * @author mimi
  */
 public class GerenciadorSalao implements Gerenciador {
-    List<Cliente> clientes;
+    private List<Cliente> clientes;
     // Implementação dos métodos abstratos
     public void adicionarCliente(Cliente c) {
         clientes.add(c);
