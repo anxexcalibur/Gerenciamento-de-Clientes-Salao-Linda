@@ -11,6 +11,6 @@ import java.util.ArrayList;
 public interface Gerenciador {
     //Interface para colocar metodos necessarios a todas as classes filhas
     public void adicionarCliente(Cliente c);
-    public void removerCliente(Cliente c);
+    //public void removerCliente(Cliente c);
     public ArrayList<Cliente> getClientes();
 }

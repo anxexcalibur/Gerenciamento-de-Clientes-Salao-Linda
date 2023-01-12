@@ -35,13 +35,13 @@ public class Cliente extends Pessoa {
         incrementarTotalDeClientesFidelizados(); //Fiz uma pergunta sobre o último método no fim da classe, confira!
     }
     // Métodos de acesso e manipulação ("getters" e "setters") para os atributos da classe Cliente
-    public int getPontos() {
-        return pontosFidelidade;
-    }
+    //public int getPontos() {
+    //    return pontosFidelidade;
+    //}
     // Método para adicionar pontos de fidelidade ao cliente
-    public void adicionarPontosFidelidade(){
-        pontosFidelidade++;
-    }
+    //public void adicionarPontosFidelidade(){
+    //    pontosFidelidade++;
+    //}
     // Atributo estático para armazenar o total de clientes fidelizados
     public static void incrementarTotalDeClientesFidelizados(){
         totalDeClientesFidelizados++;

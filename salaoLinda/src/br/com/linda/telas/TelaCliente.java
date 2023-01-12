@@ -37,7 +37,8 @@ public class TelaCliente extends javax.swing.JFrame {
                 String nome=rs.getString("nome");
                 String telefone=rs.getString("telefone");
                 String endereco=rs.getString("endereco");
-                String tabelaCliente[]={id,nome,telefone,endereco};
+                String pontos=String.valueOf(rs.getInt("pontos"));
+                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
                 tabelaModelo.addRow(tabelaCliente);                
                 //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
             }
@@ -73,9 +74,10 @@ public class TelaCliente extends javax.swing.JFrame {
         btnAdicionar = new javax.swing.JButton();
         btnAtualizar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
-        adicionarPontos = new javax.swing.JButton();
+        btnAdicionarPontos = new javax.swing.JButton();
         pontosField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btnRemoverPontos = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -160,10 +162,10 @@ public class TelaCliente extends javax.swing.JFrame {
             }
         });
 
-        adicionarPontos.setText("Adicionar mais pontos de fidelidade");
-        adicionarPontos.addActionListener(new java.awt.event.ActionListener() {
+        btnAdicionarPontos.setText("Adicionar mais pontos de fidelidade");
+        btnAdicionarPontos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                adicionarPontosActionPerformed(evt);
+                btnAdicionarPontosActionPerformed(evt);
             }
         });
 
@@ -174,6 +176,13 @@ public class TelaCliente extends javax.swing.JFrame {
         });
 
         jLabel4.setText("Número de clientes fidelizadas:");
+
+        btnRemoverPontos.setText("Remover mais pontos de fidelidade");
+        btnRemoverPontos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverPontosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -195,11 +204,12 @@ public class TelaCliente extends javax.swing.JFrame {
                             .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(adicionarPontos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnAdicionarPontos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(btnAdicionar)
                                     .addGap(18, 18, 18)
-                                    .addComponent(btnAtualizar)))
+                                    .addComponent(btnAtualizar))
+                                .addComponent(btnRemoverPontos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(pontosField)
@@ -242,7 +252,9 @@ public class TelaCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRemover)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(adicionarPontos)
+                        .addComponent(btnAdicionarPontos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemoverPontos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -289,7 +301,8 @@ public class TelaCliente extends javax.swing.JFrame {
                 String nome=rs.getString("nome");
                 String telefone=rs.getString("telefone");
                 String endereco=rs.getString("endereco");
-                String tabelaCliente[]={id,nome,telefone,endereco};
+                String pontos=String.valueOf(rs.getInt("pontos"));
+                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
                 tabelaModelo.addRow(tabelaCliente);                
                 //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
             }
@@ -334,9 +347,10 @@ public class TelaCliente extends javax.swing.JFrame {
                 String nome=rs.getString("nome");
                 String telefone=rs.getString("telefone");
                 String endereco=rs.getString("endereco");
-                String tabelaCliente[]={id,nome,telefone,endereco};
+                String pontos=String.valueOf(rs.getInt("pontos"));
+                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
                 tabelaModelo.addRow(tabelaCliente);                
-                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
+                //System.out.println(tabelaModelo.getRowCount()); //Verificar os numeros de linha, longa histótia quis me matar
             }
             //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
         }
@@ -348,9 +362,37 @@ public class TelaCliente extends javax.swing.JFrame {
         //AQUI TERMINA A CONEXAO COM O BD
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
-    private void adicionarPontosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarPontosActionPerformed
+    private void btnAdicionarPontosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarPontosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_adicionarPontosActionPerformed
+        try
+        {
+            String sql="update tabelaClientes set pontos=pontos+1 where id='"+idField.getText()+"'";
+            st=conexao.createStatement();
+            st.execute(sql);
+            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
+            tabelaModelo.setRowCount(0);
+            sql="select * from tabelaClientes";
+            st=conexao.createStatement();
+            rs=st.executeQuery(sql);
+            while(rs.next())
+            {
+                String id=String.valueOf(rs.getInt("id"));
+                String nome=rs.getString("nome");
+                String telefone=rs.getString("telefone");
+                String endereco=rs.getString("endereco");
+                String pontos=String.valueOf(rs.getInt("pontos"));
+                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
+                tabelaModelo.addRow(tabelaCliente);                
+                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
+            }
+            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Houve um erro\n "+e);
+        }
+    }//GEN-LAST:event_btnAdicionarPontosActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
@@ -371,7 +413,8 @@ public class TelaCliente extends javax.swing.JFrame {
                 String nome=rs.getString("nome");
                 String telefone=rs.getString("telefone");
                 String endereco=rs.getString("endereco");
-                String tabelaCliente[]={id,nome,telefone,endereco};
+                String pontos=String.valueOf(rs.getInt("pontos"));
+                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
                 tabelaModelo.addRow(tabelaCliente);                
                 //System.out.println(tabelaModelo.getRowCount()); Verificar os números de linha, longa histótia quis me matar
             }
@@ -388,6 +431,38 @@ public class TelaCliente extends javax.swing.JFrame {
     private void pontosFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pontosFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pontosFieldActionPerformed
+
+    private void btnRemoverPontosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverPontosActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+            String sql="update tabelaClientes set pontos=pontos-1 where id='"+idField.getText()+"'";
+            st=conexao.createStatement();
+            st.execute(sql);
+            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
+            tabelaModelo.setRowCount(0);
+            sql="select * from tabelaClientes";
+            st=conexao.createStatement();
+            rs=st.executeQuery(sql);
+            while(rs.next())
+            {
+                String id=String.valueOf(rs.getInt("id"));
+                String nome=rs.getString("nome");
+                String telefone=rs.getString("telefone");
+                String endereco=rs.getString("endereco");
+                String pontos=String.valueOf(rs.getInt("pontos"));
+                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
+                tabelaModelo.addRow(tabelaCliente);                
+                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
+            }
+            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Houve um erro\n "+e);
+        }
+    }//GEN-LAST:event_btnRemoverPontosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -427,10 +502,11 @@ public class TelaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton adicionarPontos;
     private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnAdicionarPontos;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnRemover;
+    private javax.swing.JButton btnRemoverPontos;
     private javax.swing.JTextField enderecoField;
     private javax.swing.JTextField idField;
     private javax.swing.JLabel jLabel1;

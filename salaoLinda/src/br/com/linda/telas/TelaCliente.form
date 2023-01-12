@@ -50,12 +50,13 @@
                           <Component id="nomeField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                           <Component id="idField" alignment="0" min="-2" pref="150" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="adicionarPontos" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnAdicionarPontos" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="btnAdicionar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="btnAtualizar" min="-2" max="-2" attributes="0"/>
                               </Group>
+                              <Component id="btnRemoverPontos" alignment="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
@@ -112,7 +113,9 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="btnRemover" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="adicionarPontos" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnAdicionarPontos" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnRemoverPontos" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -243,12 +246,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="adicionarPontos">
+    <Component class="javax.swing.JButton" name="btnAdicionarPontos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Adicionar mais pontos de fidelidade"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="adicionarPontosActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAdicionarPontosActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="pontosField">
@@ -263,6 +266,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="N&#xfa;mero de clientes fidelizadas:"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnRemoverPontos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Remover mais pontos de fidelidade"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRemoverPontosActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

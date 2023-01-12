@@ -22,10 +22,10 @@ public class GerenciadorSalao implements Gerenciador {
         if(c != null)
             clientes.add(c);
     }
-    @Override
+    /*@Override
     public void removerCliente(Cliente c) {
         clientes.remove(c);
-    }
+    }*/
     @Override
     public ArrayList<Cliente> getClientes()
     {
