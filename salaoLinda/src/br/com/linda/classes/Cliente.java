@@ -28,23 +28,28 @@ public class Cliente extends Pessoa {
         setTelefone(telefone);
         setEndereco(endereco);
         setId(id);
-        toString();
-        // Inicialmente, a cliente começa com zero pontos de fidelidade
         this.pontosFidelidade = 0; //Se toda cliente começa com 0 e existe adicionarPontosFidelidade
         //Por que temos o setPontosFidelidade entâo?
-        totalDeClientesFidelizados++; //Fiz uma pergunta sobre o último método no fim da classe, confira!
+        toString();
+        // Inicialmente, a cliente começa com zero pontos de fidelidade
+        incrementarTotalDeClientesFidelizados(); //Fiz uma pergunta sobre o último método no fim da classe, confira!
     }
     // Métodos de acesso e manipulação ("getters" e "setters") para os atributos da classe Cliente
-    public int getPontosFidelidade() {
+    public int getPontos() {
         return pontosFidelidade;
     }
     // Método para adicionar pontos de fidelidade ao cliente
-    public void adicionarPontosFidelidade(int pontos){
-        this.pontosFidelidade += pontos;
+    public void adicionarPontosFidelidade(){
+        pontosFidelidade++;
     }
     // Atributo estático para armazenar o total de clientes fidelizados
-    //public static void IncrementarTotalDeClientesFidelizados(){
-    //    totalDeClientesFidelizados++;
-    //}Tem certeza que precisamos desse método? Podemos colocar incremento
-    //no construtor;    
+    public static void incrementarTotalDeClientesFidelizados(){
+        totalDeClientesFidelizados++;
+    }//Tem certeza que precisamos desse método? Podemos colocar incremento
+    //no construtor
+    public int getTotal()
+    {
+        return totalDeClientesFidelizados;
+    }
+    
 }

@@ -11,6 +11,7 @@ package br.com.linda.classes;
 public abstract class Pessoa {
     private String nome, endereco, telefone;
     private int id;
+    private Cliente cliente;
     //Temos que criar pelo menos um método abastrato
     public void setNome(String nome)
     {
@@ -49,6 +50,7 @@ public abstract class Pessoa {
         sb.append("; Endereço: ").append(endereco);
         sb.append("; Telefone: ").append(telefone);
         sb.append("; ID: ").append(id);
+        //sb.append("; Pontos de fidelidade: ").append(String.valueOf(cliente.getPontos()));
         sb.append(".");
         return sb.toString();
     }
