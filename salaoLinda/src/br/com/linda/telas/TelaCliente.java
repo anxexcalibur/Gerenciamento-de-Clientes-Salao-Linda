@@ -3,18 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package br.com.linda.telas;
-
+import java.sql.*;
+import br.com.linda.dal.ModuloConexao;
 /**
  *
  * @author mimi
  */
 public class TelaCliente extends javax.swing.JFrame {
-
+    Connection conexao=null;
+    PreparedStatement prepared=null;
+    ResultSet result=null;
+    Exception exception;
     /**
      * Creates new form CrudCliente
      */
     public TelaCliente() {
         initComponents();
+        conexao=ModuloConexao.conectar();
+        if(conexao != null)
+            System.out.println(exception);
+        else
+            System.out.println(exception);
     }
 
     /**
