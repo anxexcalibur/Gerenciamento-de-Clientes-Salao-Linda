@@ -3,29 +3,53 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package br.com.linda.telas;
-import java.sql.*;
 import br.com.linda.dal.ModuloConexao;
+import br.com.linda.classes.Cliente;
+import br.com.linda.classes.GerenciadorSalao;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.JTable;
+import java.sql.*;
 /**
  *
  * @author mimi
  */
 public class TelaCliente extends javax.swing.JFrame {
     Connection conexao=null;
-    PreparedStatement prepared=null;
-    ResultSet result=null;
-    Exception exception;
+    Statement st=null;
+    ResultSet rs=null;
     /**
      * Creates new form CrudCliente
      */
     public TelaCliente() {
         initComponents();
         conexao=ModuloConexao.conectar();
-        if(conexao != null)
-            System.out.println(exception);
-        else
-            System.out.println(exception);
+        try
+        { 
+            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
+            tabelaModelo.setRowCount(0);
+            String sql="select * from tabelaClientes";
+            st=conexao.createStatement();
+            rs=st.executeQuery(sql);
+            while(rs.next())
+            {
+                String id=String.valueOf(rs.getInt("id"));
+                String nome=rs.getString("nome");
+                String telefone=rs.getString("telefone");
+                String endereco=rs.getString("endereco");
+                String tabelaCliente[]={id,nome,telefone,endereco};
+                tabelaModelo.addRow(tabelaCliente);                
+                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Houve um erro");
+        }
+        
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,21 +59,334 @@ public class TelaCliente extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
+        jlabel1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        idField = new javax.swing.JTextField();
+        nomeField = new javax.swing.JTextField();
+        telefoneField = new javax.swing.JTextField();
+        enderecoField = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaClientes = new javax.swing.JTable();
+        btnAdicionar = new javax.swing.JButton();
+        btnAtualizar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
+        adicionarPontos = new javax.swing.JButton();
+        pontosField = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+
+        jTextField1.setText("jTextField1");
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Salão Linda Cabeleireiros");
+        setResizable(false);
+
+        jlabel1.setText("Nome:");
+
+        jLabel1.setText("Id:");
+
+        jLabel2.setText("Telefone:");
+
+        jLabel3.setText("Endereço:");
+
+        idField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                idFieldActionPerformed(evt);
+            }
+        });
+
+        nomeField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nomeFieldActionPerformed(evt);
+            }
+        });
+
+        telefoneField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                telefoneFieldActionPerformed(evt);
+            }
+        });
+
+        enderecoField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enderecoFieldActionPerformed(evt);
+            }
+        });
+
+        tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Id", "Nome", "Telefone", "Endereço", "Pontos de fidelidade"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaClientes);
+        if (tabelaClientes.getColumnModel().getColumnCount() > 0) {
+            tabelaClientes.getColumnModel().getColumn(0).setResizable(false);
+            tabelaClientes.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        btnAdicionar.setText("Adicionar Cliente");
+        btnAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAdicionarActionPerformed(evt);
+            }
+        });
+
+        btnAtualizar.setText("Atualizar dados");
+        btnAtualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarActionPerformed(evt);
+            }
+        });
+
+        btnRemover.setText("Remover Cliente");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+
+        adicionarPontos.setText("Adicionar mais pontos de fidelidade");
+        adicionarPontos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                adicionarPontosActionPerformed(evt);
+            }
+        });
+
+        pontosField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pontosFieldActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Número de clientes fidelizadas:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(jlabel1)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enderecoField, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(telefoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(adicionarPontos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(btnAdicionar)
+                                    .addGap(18, 18, 18))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnRemover)
+                                    .addGap(21, 21, 21)))
+                            .addComponent(btnAtualizar)))
+                    .addComponent(jLabel4)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(pontosField)
+                        .addGap(210, 210, 210)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1424, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlabel1)
+                            .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(telefoneField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(enderecoField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAdicionar)
+                            .addComponent(btnAtualizar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnRemover)
+                        .addGap(18, 18, 18)
+                        .addComponent(adicionarPontos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(pontosField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void idFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_idFieldActionPerformed
+
+    private void nomeFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomeFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nomeFieldActionPerformed
+
+    private void telefoneFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_telefoneFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_telefoneFieldActionPerformed
+
+    private void enderecoFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enderecoFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enderecoFieldActionPerformed
+
+    private void btnAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdicionarActionPerformed
+        // TODO add your handling code here:
+        //AQUI COMEÇA A CONEXAO COM O BD
+        try
+        {
+            String sql="insert into tabelaClientes(id,nome,telefone,endereco) values('"+idField.getText()+"','"+nomeField.getText()+"','"+telefoneField.getText()+"','"+enderecoField.getText()+"')";
+            st=conexao.createStatement();
+            st.execute(sql);
+            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
+            tabelaModelo.setRowCount(0);
+            sql="select * from tabelaClientes";
+            st=conexao.createStatement();
+            rs=st.executeQuery(sql);
+            while(rs.next())
+            {
+                String id=String.valueOf(rs.getInt("id"));
+                String nome=rs.getString("nome");
+                String telefone=rs.getString("telefone");
+                String endereco=rs.getString("endereco");
+                String tabelaCliente[]={id,nome,telefone,endereco};
+                tabelaModelo.addRow(tabelaCliente);                
+                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
+            }
+            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Houve um erro\n "+e);
+        }
+        //AQUI TERMINA A CONEXAO COM O BD
+        int id=java.lang.Integer.parseInt(idField.getText()); //O mlk nao aceitou import, tive que importar diretamente
+        String nome=nomeField.getText();
+        String telefone=telefoneField.getText();
+        String endereco=enderecoField.getText();
+        Cliente cliente=new Cliente(nome,endereco,telefone,id);
+        //System.out.println(cliente);
+        //AQUI É A PARTE QUE COMECEI A MEXER COM A ADIÇÃO DO VETOR QUE RECEBE OBJETOS
+        GerenciadorSalao.gerenciador=new GerenciadorSalao();
+        GerenciadorSalao.gerenciador.adicionarCliente(cliente);
+        //for(Cliente c : GerenciadorSalao.gerenciador.getClientes())
+        //    System.out.println(c);
+        System.out.println(GerenciadorSalao.gerenciador.getClientes());
+    }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
+        // TODO add your handling code here:
+        //AQUI COMEÇA A CONEXAO COM O BD
+        try
+        {
+            String sql="update tabelaClientes set nome='"+nomeField.getText()+"',telefone='"+telefoneField.getText()+"',endereco='"+enderecoField.getText()+"' where id='"+idField.getText()+"'";
+            st=conexao.createStatement();
+            st.execute(sql);
+            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
+            tabelaModelo.setRowCount(0);
+            sql="select * from tabelaClientes";
+            st=conexao.createStatement();
+            rs=st.executeQuery(sql);
+            while(rs.next())
+            {
+                String id=String.valueOf(rs.getInt("id"));
+                String nome=rs.getString("nome");
+                String telefone=rs.getString("telefone");
+                String endereco=rs.getString("endereco");
+                String tabelaCliente[]={id,nome,telefone,endereco};
+                tabelaModelo.addRow(tabelaCliente);                
+                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
+            }
+            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Houve um erro\n "+e);
+        }
+        //AQUI TERMINA A CONEXAO COM O BD
+    }//GEN-LAST:event_btnAtualizarActionPerformed
+
+    private void adicionarPontosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adicionarPontosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_adicionarPontosActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        // TODO add your handling code here:
+        //AQUI COMEÇA A CONEXAO COM O BD
+        try
+        {
+            String sql="delete from tabelaClientes where id='"+idField.getText()+"'";
+            st=conexao.createStatement();
+            st.execute(sql);
+            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
+            tabelaModelo.setRowCount(0);
+            sql="select * from tabelaClientes";
+            st=conexao.createStatement();
+            rs=st.executeQuery(sql);
+            while(rs.next())
+            {
+                String id=String.valueOf(rs.getInt("id"));
+                String nome=rs.getString("nome");
+                String telefone=rs.getString("telefone");
+                String endereco=rs.getString("endereco");
+                String tabelaCliente[]={id,nome,telefone,endereco};
+                tabelaModelo.addRow(tabelaCliente);                
+                //System.out.println(tabelaModelo.getRowCount()); Verificar os números de linha, longa histótia quis me matar
+            }
+            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+        }
+        catch(Exception e)
+        {
+            System.out.println(e);
+            JOptionPane.showMessageDialog(this, "Houve um erro\n "+e);
+        }
+        //AQUI TERMINA A CONEXAO COM O BD
+    }//GEN-LAST:event_btnRemoverActionPerformed
+
+    private void pontosFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pontosFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_pontosFieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,15 +415,33 @@ public class TelaCliente extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new TelaCliente().setVisible(true);
             }
         });
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton adicionarPontos;
+    private javax.swing.JButton btnAdicionar;
+    private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnRemover;
+    private javax.swing.JTextField enderecoField;
+    private javax.swing.JTextField idField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jlabel1;
+    private javax.swing.JTextField nomeField;
+    private javax.swing.JTextField pontosField;
+    private javax.swing.JTable tabelaClientes;
+    private javax.swing.JTextField telefoneField;
     // End of variables declaration//GEN-END:variables
 }

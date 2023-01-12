@@ -4,30 +4,32 @@
  */
 package br.com.linda.classes;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
  * @author mimi
  */
 public class GerenciadorSalao implements Gerenciador {
-    private List<Cliente> clientes;
+    private ArrayList<Cliente> clientes;
     // Implementação dos métodos abstratos
+    public GerenciadorSalao()
+    {
+        clientes = new ArrayList<Cliente>();
+    }
     @Override
     public void adicionarCliente(Cliente c) {
-        clientes.add(c);
+        if(c != null)
+            clientes.add(c);
     }
     @Override
     public void removerCliente(Cliente c) {
         clientes.remove(c);
     }
     @Override
-    public Cliente pesquisarCliente(String nome) {
-        for (Cliente c : clientes) {
-            if (c.getNome().equals(nome)) {
-                return c;
-            }
-        }
-        return null;
+    public ArrayList<Cliente> getClientes()
+    {
+        return clientes;
     }
+    public static Gerenciador gerenciador;
 }

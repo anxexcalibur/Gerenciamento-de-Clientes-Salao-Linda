@@ -19,7 +19,7 @@ public class ModuloConexao {
         //o comando abaixo "chama" o driver
         String driver="com.mysql.cj.jdbc.Driver";
         //armazenando informações referentes ao banco
-        String url="jdbc:mysql://localhost:3306/dbInfoCliente";
+        String url="jdbc:mysql://localhost:3306/salaoLinda";
         String user="root";
         String password="Jpjm32217%";
         //Estabelecendo a conexao com o banco
@@ -32,7 +32,7 @@ public class ModuloConexao {
         catch (Exception e)
         {
             //o comando abaixo expoe o erro
-            //System.out.println(e);
+            System.out.println(e);
             return null;
         }    
     }

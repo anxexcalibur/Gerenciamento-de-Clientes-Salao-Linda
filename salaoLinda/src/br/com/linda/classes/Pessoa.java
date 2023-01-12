@@ -10,18 +10,27 @@ package br.com.linda.classes;
  */
 public abstract class Pessoa {
     private String nome, endereco, telefone;
+    private int id;
     //Temos que criar pelo menos um método abastrato
     public void setNome(String nome)
     {
-        this.nome = nome;
+        this.nome = (nome != null) ? nome : "";
     }
     public void setTelefone(String telefone)
     {
-        this.telefone = telefone;
+        this.telefone = (telefone != null) ? telefone : "";
     }
     public void setEndereco(String endereco)
     {
-        this.endereco = endereco;
+        this.endereco = (endereco != null) ? endereco : "";
+    }
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+    public int getId(int id)
+    {
+        return id;
     }
     public String getNome() {
         return nome;
@@ -31,5 +40,16 @@ public abstract class Pessoa {
     }
     public String getEndereco() {
         return endereco;
+    }
+    @Override
+    public String toString()
+    {
+        StringBuilder sb=new StringBuilder();
+        sb.append("Cliente - Nome: ").append(nome);
+        sb.append("; Endereço: ").append(endereco);
+        sb.append("; Telefone: ").append(telefone);
+        sb.append("; ID: ").append(id);
+        sb.append(".");
+        return sb.toString();
     }
 }

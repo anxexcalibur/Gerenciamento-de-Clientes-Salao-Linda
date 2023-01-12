@@ -18,7 +18,6 @@ public class Cliente extends Pessoa {
     os atributos pontosFidelidade e totalDeClientesFidelizados que é um atributo específico à cliente*/
     private int pontosFidelidade;
     /*public Alterei por questão de encapsulamento mesmo*/private static int totalDeClientesFidelizados = 0;
-    private static int id;
     public Cliente(String nome, String endereco,String telefone,int id)
     {
         //construtor
@@ -29,18 +28,11 @@ public class Cliente extends Pessoa {
         setTelefone(telefone);
         setEndereco(endereco);
         setId(id);
+        toString();
         // Inicialmente, a cliente começa com zero pontos de fidelidade
         this.pontosFidelidade = 0; //Se toda cliente começa com 0 e existe adicionarPontosFidelidade
         //Por que temos o setPontosFidelidade entâo?
         totalDeClientesFidelizados++; //Fiz uma pergunta sobre o último método no fim da classe, confira!
-    }
-    public void setId(int id)
-    {
-        this.id=id;
-    }
-    public int getId(int id)
-    {
-        return id;
     }
     // Métodos de acesso e manipulação ("getters" e "setters") para os atributos da classe Cliente
     public int getPontosFidelidade() {
@@ -51,8 +43,8 @@ public class Cliente extends Pessoa {
         this.pontosFidelidade += pontos;
     }
     // Atributo estático para armazenar o total de clientes fidelizados
-    public static void IncrementarTotalDeClientesFidelizados(){
-        totalDeClientesFidelizados++;
-    }//Tem certeza que precisamos desse método? Podemos colocar incremento
-    //no construtor;
+    //public static void IncrementarTotalDeClientesFidelizados(){
+    //    totalDeClientesFidelizados++;
+    //}Tem certeza que precisamos desse método? Podemos colocar incremento
+    //no construtor;    
 }
