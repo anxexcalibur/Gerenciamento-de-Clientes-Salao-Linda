@@ -46,7 +46,7 @@ public class TelaCliente extends javax.swing.JFrame {
         catch(Exception e)
         {
             System.out.println(e);
-            JOptionPane.showMessageDialog(this, "Houve um erro");
+            JOptionPane.showMessageDialog(this, "Houve um erro\n "+e);
         }
     }
     
