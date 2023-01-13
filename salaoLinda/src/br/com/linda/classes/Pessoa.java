@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package br.com.linda.classes;
-
 /**
  *
  * @author mimi
  */
-public abstract class Pessoa {
+public abstract class Pessoa implements java.io.Serializable {
     private String nome, endereco, telefone;
     private int id;
     private Cliente cliente;

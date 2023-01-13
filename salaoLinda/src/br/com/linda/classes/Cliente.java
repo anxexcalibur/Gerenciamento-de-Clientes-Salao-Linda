@@ -16,8 +16,8 @@ public class Cliente extends Pessoa {
     private String telefone; 
     Retirei esses atributos pois eles devem ficar em pessoa e serem herdados de lá, somente restando 
     os atributos pontosFidelidade e totalDeClientesFidelizados que é um atributo específico à cliente*/
-    private int pontosFidelidade;
-    /*public Alterei por questão de encapsulamento mesmo*/private static int totalDeClientesFidelizados = 0;
+    //private int pontosFidelidade;
+    ///*public Alterei por questão de encapsulamento mesmo*/private static int totalDeClientesFidelizados = 0;
     public Cliente(String nome, String endereco,String telefone,int id)
     {
         //construtor
@@ -28,11 +28,11 @@ public class Cliente extends Pessoa {
         setTelefone(telefone);
         setEndereco(endereco);
         setId(id);
-        this.pontosFidelidade = 0; //Se toda cliente começa com 0 e existe adicionarPontosFidelidade
+        //this.pontosFidelidade = 0; //Se toda cliente começa com 0 e existe adicionarPontosFidelidade
         //Por que temos o setPontosFidelidade entâo?
         toString();
         // Inicialmente, a cliente começa com zero pontos de fidelidade
-        incrementarTotalDeClientesFidelizados(); //Fiz uma pergunta sobre o último método no fim da classe, confira!
+        //incrementarTotalDeClientesFidelizados(); //Fiz uma pergunta sobre o último método no fim da classe, confira!
     }
     // Métodos de acesso e manipulação ("getters" e "setters") para os atributos da classe Cliente
     //public int getPontos() {
@@ -43,13 +43,13 @@ public class Cliente extends Pessoa {
     //    pontosFidelidade++;
     //}
     // Atributo estático para armazenar o total de clientes fidelizados
-    public static void incrementarTotalDeClientesFidelizados(){
+    /*public static void incrementarTotalDeClientesFidelizados(){
         totalDeClientesFidelizados++;
     }//Tem certeza que precisamos desse método? Podemos colocar incremento
     //no construtor
     public int getTotal()
     {
         return totalDeClientesFidelizados;
-    }
+    }*/
     
 }
