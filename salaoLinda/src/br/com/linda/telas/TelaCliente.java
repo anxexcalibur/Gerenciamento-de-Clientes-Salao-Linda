@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTable;
 import java.sql.*;
+import java.util.ArrayList;
 /**
  *
  * @author mimi
@@ -21,9 +22,8 @@ public class TelaCliente extends javax.swing.JFrame {
     /**
      * Creates new form CrudCliente
      */
-    public TelaCliente() {
-        initComponents();
-        conexao=ModuloConexao.conectar();
+    private void exibirDados()
+    {
         try
         { 
             DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
@@ -48,7 +48,14 @@ public class TelaCliente extends javax.swing.JFrame {
             System.out.println(e);
             JOptionPane.showMessageDialog(this, "Houve um erro");
         }
-        
+    }
+    
+    public TelaCliente() {
+        initComponents();
+        conexao=ModuloConexao.conectar();
+        exibirDados();
+        GerenciadorSalao gerenciador = new GerenciadorSalao();
+        gerenciador.desSerializacaoArrays();
     }
     
     /**
@@ -75,9 +82,8 @@ public class TelaCliente extends javax.swing.JFrame {
         btnAtualizar = new javax.swing.JButton();
         btnRemover = new javax.swing.JButton();
         btnAdicionarPontos = new javax.swing.JButton();
-        pontosField = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
         btnRemoverPontos = new javax.swing.JButton();
+        btnDESTRUIR = new javax.swing.JButton();
 
         jTextField1.setText("jTextField1");
 
@@ -169,18 +175,20 @@ public class TelaCliente extends javax.swing.JFrame {
             }
         });
 
-        pontosField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pontosFieldActionPerformed(evt);
-            }
-        });
-
-        jLabel4.setText("Número de clientes fidelizadas:");
-
         btnRemoverPontos.setText("Remover mais pontos de fidelidade");
         btnRemoverPontos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRemoverPontosActionPerformed(evt);
+            }
+        });
+
+        btnDESTRUIR.setBackground(java.awt.Color.red);
+        btnDESTRUIR.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
+        btnDESTRUIR.setForeground(java.awt.Color.white);
+        btnDESTRUIR.setText("DESTRUIR REGISTRO");
+        btnDESTRUIR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDESTRUIRActionPerformed(evt);
             }
         });
 
@@ -192,32 +200,35 @@ public class TelaCliente extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel1)
-                            .addComponent(jlabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(enderecoField, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(telefoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnAdicionarPontos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(btnAdicionar)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(btnAtualizar))
-                                .addComponent(btnRemoverPontos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(pontosField)
-                                .addGap(210, 210, 210))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jlabel1)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(enderecoField, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(telefoneField, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(nomeField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(idField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(btnAdicionarPontos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                            .addComponent(btnAdicionar)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(btnAtualizar))
+                                        .addComponent(btnRemoverPontos, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(btnRemover)
+                                .addGap(124, 124, 124))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnRemover)
-                        .addGap(124, 124, 124)))
+                        .addComponent(btnDESTRUIR)
+                        .addGap(100, 100, 100)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1424, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -256,10 +267,8 @@ public class TelaCliente extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRemoverPontos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pontosField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))))
+                        .addComponent(btnDESTRUIR)
+                        .addGap(29, 29, 29))))
         );
 
         pack();
@@ -290,23 +299,7 @@ public class TelaCliente extends javax.swing.JFrame {
             String sql="insert into tabelaClientes(id,nome,telefone,endereco) values('"+idField.getText()+"','"+nomeField.getText()+"','"+telefoneField.getText()+"','"+enderecoField.getText()+"')";
             st=conexao.createStatement();
             st.execute(sql);
-            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
-            tabelaModelo.setRowCount(0);
-            sql="select * from tabelaClientes";
-            st=conexao.createStatement();
-            rs=st.executeQuery(sql);
-            while(rs.next())
-            {
-                String id=String.valueOf(rs.getInt("id"));
-                String nome=rs.getString("nome");
-                String telefone=rs.getString("telefone");
-                String endereco=rs.getString("endereco");
-                String pontos=String.valueOf(rs.getInt("pontos"));
-                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
-                tabelaModelo.addRow(tabelaCliente);                
-                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
-            }
-            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+            exibirDados();
         }
         catch(Exception e)
         {
@@ -321,11 +314,20 @@ public class TelaCliente extends javax.swing.JFrame {
         Cliente cliente=new Cliente(nome,endereco,telefone,id);
         //System.out.println(cliente);
         //AQUI É A PARTE QUE COMECEI A MEXER COM A ADIÇÃO DO VETOR QUE RECEBE OBJETOS
-        GerenciadorSalao.gerenciador=new GerenciadorSalao();
-        GerenciadorSalao.gerenciador.adicionarCliente(cliente);
+        //GerenciadorSalao.gerenciador=new GerenciadorSalao();
+        //GerenciadorSalao.gerenciador.adicionarCliente(cliente);
         //for(Cliente c : GerenciadorSalao.gerenciador.getClientes())
         //    System.out.println(c);
-        System.out.println(GerenciadorSalao.gerenciador.getClientes());
+        //System.out.println(GerenciadorSalao.gerenciador.getClientes());
+        GerenciadorSalao gerenciador = new GerenciadorSalao();
+        gerenciador.adicionarCliente(cliente);
+        //ArrayList<Cliente> clientes = gerenciador.getClientes();
+        //for (int i = 0; i < gerenciador.getClientes().size(); i++)
+        //{
+        //System.out.println(gerenciador.getClientes());
+        //}
+        gerenciador.serializacaoArrays();
+        gerenciador.desSerializacaoArrays();
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void btnAtualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarActionPerformed
@@ -336,23 +338,7 @@ public class TelaCliente extends javax.swing.JFrame {
             String sql="update tabelaClientes set nome='"+nomeField.getText()+"',telefone='"+telefoneField.getText()+"',endereco='"+enderecoField.getText()+"' where id='"+idField.getText()+"'";
             st=conexao.createStatement();
             st.execute(sql);
-            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
-            tabelaModelo.setRowCount(0);
-            sql="select * from tabelaClientes";
-            st=conexao.createStatement();
-            rs=st.executeQuery(sql);
-            while(rs.next())
-            {
-                String id=String.valueOf(rs.getInt("id"));
-                String nome=rs.getString("nome");
-                String telefone=rs.getString("telefone");
-                String endereco=rs.getString("endereco");
-                String pontos=String.valueOf(rs.getInt("pontos"));
-                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
-                tabelaModelo.addRow(tabelaCliente);                
-                //System.out.println(tabelaModelo.getRowCount()); //Verificar os numeros de linha, longa histótia quis me matar
-            }
-            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+            exibirDados();
         }
         catch(Exception e)
         {
@@ -369,23 +355,7 @@ public class TelaCliente extends javax.swing.JFrame {
             String sql="update tabelaClientes set pontos=pontos+1 where id='"+idField.getText()+"'";
             st=conexao.createStatement();
             st.execute(sql);
-            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
-            tabelaModelo.setRowCount(0);
-            sql="select * from tabelaClientes";
-            st=conexao.createStatement();
-            rs=st.executeQuery(sql);
-            while(rs.next())
-            {
-                String id=String.valueOf(rs.getInt("id"));
-                String nome=rs.getString("nome");
-                String telefone=rs.getString("telefone");
-                String endereco=rs.getString("endereco");
-                String pontos=String.valueOf(rs.getInt("pontos"));
-                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
-                tabelaModelo.addRow(tabelaCliente);                
-                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
-            }
-            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+            exibirDados();
         }
         catch(Exception e)
         {
@@ -402,23 +372,7 @@ public class TelaCliente extends javax.swing.JFrame {
             String sql="delete from tabelaClientes where id='"+idField.getText()+"'";
             st=conexao.createStatement();
             st.execute(sql);
-            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
-            tabelaModelo.setRowCount(0);
-            sql="select * from tabelaClientes";
-            st=conexao.createStatement();
-            rs=st.executeQuery(sql);
-            while(rs.next())
-            {
-                String id=String.valueOf(rs.getInt("id"));
-                String nome=rs.getString("nome");
-                String telefone=rs.getString("telefone");
-                String endereco=rs.getString("endereco");
-                String pontos=String.valueOf(rs.getInt("pontos"));
-                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
-                tabelaModelo.addRow(tabelaCliente);                
-                //System.out.println(tabelaModelo.getRowCount()); Verificar os números de linha, longa histótia quis me matar
-            }
-            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+            exibirDados();
         }
         catch(Exception e)
         {
@@ -428,10 +382,6 @@ public class TelaCliente extends javax.swing.JFrame {
         //AQUI TERMINA A CONEXAO COM O BD
     }//GEN-LAST:event_btnRemoverActionPerformed
 
-    private void pontosFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pontosFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_pontosFieldActionPerformed
-
     private void btnRemoverPontosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverPontosActionPerformed
         // TODO add your handling code here:
         try
@@ -439,23 +389,7 @@ public class TelaCliente extends javax.swing.JFrame {
             String sql="update tabelaClientes set pontos=pontos-1 where id='"+idField.getText()+"'";
             st=conexao.createStatement();
             st.execute(sql);
-            DefaultTableModel tabelaModelo=(DefaultTableModel)tabelaClientes.getModel();
-            tabelaModelo.setRowCount(0);
-            sql="select * from tabelaClientes";
-            st=conexao.createStatement();
-            rs=st.executeQuery(sql);
-            while(rs.next())
-            {
-                String id=String.valueOf(rs.getInt("id"));
-                String nome=rs.getString("nome");
-                String telefone=rs.getString("telefone");
-                String endereco=rs.getString("endereco");
-                String pontos=String.valueOf(rs.getInt("pontos"));
-                String tabelaCliente[]={id,nome,telefone,endereco,pontos};
-                tabelaModelo.addRow(tabelaCliente);                
-                //System.out.println(tabelaModelo.getRowCount()); Verificar os numeros de linha, longa histótia quis me matar
-            }
-            //JOptionPane.showMessageDialog(this,"Dados da cliente adicionados com sucesso"); Muito chato ficar recebendo isso sendo que há outra forma de visualização
+            exibirDados();
         }
         catch(Exception e)
         {
@@ -463,6 +397,14 @@ public class TelaCliente extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Houve um erro\n "+e);
         }
     }//GEN-LAST:event_btnRemoverPontosActionPerformed
+
+    private void btnDESTRUIRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDESTRUIRActionPerformed
+        // TODO add your handling code here:
+        GerenciadorSalao gerenciador = new GerenciadorSalao();
+        gerenciador.destruirRegistro();
+        gerenciador.serializacaoArrays();
+        gerenciador.desSerializacaoArrays();
+    }//GEN-LAST:event_btnDESTRUIRActionPerformed
 
     /**
      * @param args the command line arguments
@@ -505,6 +447,7 @@ public class TelaCliente extends javax.swing.JFrame {
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnAdicionarPontos;
     private javax.swing.JButton btnAtualizar;
+    private javax.swing.JButton btnDESTRUIR;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnRemoverPontos;
     private javax.swing.JTextField enderecoField;
@@ -512,12 +455,10 @@ public class TelaCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JTextField nomeField;
-    private javax.swing.JTextField pontosField;
     private javax.swing.JTable tabelaClientes;
     private javax.swing.JTextField telefoneField;
     // End of variables declaration//GEN-END:variables
